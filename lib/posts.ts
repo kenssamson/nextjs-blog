@@ -6,7 +6,7 @@ import html from 'remark-html'
 
 const postsDirectory = path.join(process.cwd(), 'posts')
 
-export async function getPostData(id) {
+export async function getPostData(id: string) {
 
   // read markdown file as string
   const fullPath = path.join(postsDirectory, `${id}.md`)
@@ -24,7 +24,7 @@ export async function getPostData(id) {
   return {
     id,
     contentHtml,
-    ...matterResult.data
+    ...(matterResult.data as { date: string; title: string })
   }
 }
 
@@ -54,7 +54,7 @@ export function getSortedPostsData() {
     */
     return {
       id,
-      ...matterResult.data
+      ...(matterResult.data as { date: string; title: string })
     }
   })
 
